@@ -1,0 +1,110 @@
+﻿@model WebApplication1.Models.food
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>food</h4>
+<hr />
+<div class="row">
+    <div class="col-md-12">
+        <form asp-action="Edit" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="ID" />
+            <div class="form-group">
+                <label asp-for="foodName" class="control-label"></label>
+                <input asp-for="foodName" class="form-control" />
+                <span asp-validation-for="foodName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="foodDescription" class="control-label"></label>
+                <input asp-for="foodDescription" class="form-control" />
+                <span asp-validation-for="foodDescription" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="foodCode" class="control-label"></label>
+                <input asp-for="foodCode" class="form-control" />
+                <span asp-validation-for="foodCode" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Date" class="control-label"></label>
+                <input asp-for="Date" class="form-control" />
+                <span asp-validation-for="Date" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ImagePath" class="control-label"></label>
+                <input asp-for="ImagePath" class="form-control" />
+                <span asp-validation-for="ImagePath" class="text-danger"></span>
+            </div>
+            <br />
+            <table class="table table-responsive table-hover table-bordered table-striped">
+
+                <thead>
+                    <tr>
+                        <th>
+                            Item Name
+                        </th>
+                        <th>
+                            Unit Price
+                        </th>
+                        <th>
+                            Quantity
+                        </th>
+                        <th>
+                            Total
+                        </th>
+                        <th>
+                            <input type="submit" value="Add" name="command" class="btn btn-success " />
+                        </th>
+                    </tr>
+                </thead>
+
+                <tbody>
+
+                    @for (int i = 0; i < Model.Items.Count; i++)
+                    {
+                        <tr>
+                            <td>
+                                <input asp-for="Items[i].ItemId" class="form-control" type="hidden" />
+                                <input asp-for="Items[i].ItemName" class="form-control" />
+                            </td>
+                            <td>
+                                <input asp-for="Items[i].UnitPrice" class="form-control" />
+                            </td>
+                            <td>
+                                <input asp-for="Items[i].Quantity" class="form-control" />
+                            </td>
+                            <td>
+                                <input asp-for="Items[i].ItemTotal" class="form-control" readonly />
+                            </td>
+                            <td>
+                                <button value="delete-@i" name="command">Delete</button>
+                            </td>
+                        </tr>
+                    }
+
+                </tbody>
+
+
+            </table>
+
+            <hr />
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

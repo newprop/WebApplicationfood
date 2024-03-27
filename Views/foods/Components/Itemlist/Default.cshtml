@@ -1,0 +1,52 @@
+﻿@model List<foodItem>
+
+<table class="table table-responsive table-hover table-bordered table-striped">
+
+    <thead>
+        <tr>
+            <th>
+                Item Name
+            </th>
+            <th>
+                Unit Price
+            </th>
+            <th>
+                Quantity
+            </th>
+            <th>
+                Total
+            </th>
+            <th>
+                <input type="submit" value="Add" name="command" class="btn btn-success " />
+            </th>
+        </tr>
+    </thead>
+
+    <tbody>
+
+        @for (int i = 0; i < Model.Count; i++)
+        {
+            <tr>
+                <td>
+                    <input asp-for="@Model[i].ItemId" class="form-control" type="hidden" />
+                    <input asp-for="@Model[i].ItemName" class="form-control" />
+                </td>
+                <td>
+                    <input asp-for="@Model[i].UnitPrice" class="form-control" />
+                </td>
+                <td>
+                    <input asp-for="@Model[i].Quantity" class="form-control" />
+                </td>
+                <td>
+                    <input asp-for="@Model[i].ItemTotal" class="form-control" readonly />
+                </td>
+                <td>
+                    <button value="delete-@i" name="command">Delete</button>
+                </td>
+            </tr>
+        }
+
+    </tbody>
+
+
+</table>
